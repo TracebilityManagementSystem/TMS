@@ -1,4 +1,4 @@
-use db;
+use TMS;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -38,6 +38,8 @@ CREATE TABLE Artifact (
   VersionId INT NOT NULL,
   CharId INT NOT NULL,
   ConsId INT NOT NULL,  
+  Title varchar(100) NOT NULL,
+  Description varchar(10000),
 	
   CONSTRAINT Artifact_fk1 FOREIGN KEY(VersionId)
   REFERENCES Version (VersionId)
