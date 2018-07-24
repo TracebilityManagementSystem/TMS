@@ -16,14 +16,14 @@ CREATE TABLE Version (
   VersionId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   Owner varchar(100) NOT NULL,
   Modi_by varchar(100) NOT NULL,
-  Modi_on varchar(1000) NOT NULL,
-  Time TIME NOT NULL
+  Modi_on DATETIME NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE Characterization (
   CharId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   Type varchar(100) NOT NULL,
-  Status varchar(100) NOT NULL
+  Domain varchar(100) NOT NULL,
+  Granularity varchar(100) NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE Constraints (
@@ -39,19 +39,19 @@ CREATE TABLE Artifact (
   CharId INT NOT NULL,
   ConsId INT NOT NULL,  
   Title varchar(100) NOT NULL,
-  Description varchar(10000),
+  Description varchar(8000)
 	
-  CONSTRAINT Artifact_fk1 FOREIGN KEY(VersionId)
-  REFERENCES Version (VersionId)
-  ON  UPDATE CASCADE ON DELETE CASCADE,
+  -- CONSTRAINT Artifact_fk1 FOREIGN KEY(VersionId)
+  -- REFERENCES Version (VersionId)
+  -- ON  UPDATE CASCADE ON DELETE CASCADE,
 	
-  CONSTRAINT Artifact_fk2 FOREIGN KEY(CharId)
-  REFERENCES  Characterization (CharId)
-  ON  UPDATE CASCADE ON DELETE CASCADE,
+  -- CONSTRAINT Artifact_fk2 FOREIGN KEY(CharId)
+  -- REFERENCES  Characterization (CharId)
+  -- ON  UPDATE CASCADE ON DELETE CASCADE,
   
-  CONSTRAINT Artifact_fk3 FOREIGN KEY(ConsId)
-  REFERENCES Constraints (ConsId)
-  ON  UPDATE CASCADE ON DELETE CASCADE
+  -- CONSTRAINT Artifact_fk3 FOREIGN KEY(ConsId)
+  -- REFERENCES Constraints (ConsId)
+  -- ON  UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Trace (

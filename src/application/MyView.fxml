@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="751.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <TabPane prefHeight="620.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Create Artifact">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Add Tracelink">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="562.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="609.0" prefWidth="1045.0">
+                                 <children>
+                                    <HBox prefHeight="609.0" prefWidth="1045.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="609.0" prefWidth="531.0">
+                                             <children>
+                                                <Text layoutX="26.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source Artifact">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <ChoiceBox fx:id="source" layoutX="217.0" layoutY="173.0" />
+                                                <Text layoutX="26.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Target Artifact">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <ChoiceBox fx:id="target" layoutX="217.0" layoutY="305.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="609.0" prefWidth="512.0">
+                                             <children>
+                                                <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Link Type">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Text>
+                                                <TreeView fx:id="treeView" layoutY="113.0" prefHeight="421.0" prefWidth="436.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="113.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="CENTER" mnemonicParsing="false" text="Add link">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
