@@ -2,6 +2,8 @@ package application;
 import java.sql.*;
 import java.util.Date;
 
+import javafx.scene.control.TreeItem;
+
 public class Database {
 	
 	private Connection conn;
@@ -27,12 +29,13 @@ public class Database {
 		}
 	}
 	
-	void insertTracelink(int linkId, String sourceArtifact, String targetArtifact) {
+	void insertTracelink(int linkId, String sourceArtifact, String targetArtifact, String text3) {
 		try {
-			PreparedStatement stmt = conn.prepareStatement("INSERT INTO Tracelink (LinkId, sourceArtifact, targetArtifact) VALUES ( ?, ?, ?) ");
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO Tracelink (LinkId, sourceArtifact, targetArtifact, linkType) VALUES ( ?, ?, ?, ?) ");
 			stmt.setInt(1, linkId);
 			stmt.setString(2, sourceArtifact);
 			stmt.setString(3, targetArtifact);
+			stmt.setString(4, text3);
 			stmt.execute();
 			
 		} catch (SQLException e) {
@@ -56,6 +59,32 @@ public class Database {
 		}
 	}
 	
+	void insertCharacterization(String type, String status) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO Characterization (Type, Status) VALUES ( ?, ?) ");
+			stmt.setString(1, type);
+			stmt.setString(2, status);
+			stmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void insertConstraints(String type, String value, String language) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO Constraints (Type, Value, Language) VALUES ( ?, ?, ?) ");
+			stmt.setString(1, type);
+			stmt.setString(2, value);
+			stmt.setString(3, language);
+			stmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

@@ -77,6 +77,7 @@ CREATE TABLE Tracelink (
   LinkId INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   sourceArtifact varchar(100) NOT NULL,
   targetArtifact varchar(100) NOT NULL,
+  linkType varchar(100) NOT NULL,
   
   CONSTRAINT Tracelink_fk1 FOREIGN KEY(sourceArtifact)
   REFERENCES Artifact (Art_uri)
