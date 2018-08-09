@@ -7,6 +7,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
+import java.util.Stack;
+
+import application.SemanticWeb;
+import tree.*;
+
 public class MainController {
 
     @FXML
@@ -26,35 +31,50 @@ public class MainController {
     	source.getItems().addAll(list);
     	target.getItems().addAll(list);
     	
-    	TreeItem<String> root = new TreeItem<>("Trace-link");
-    	root.setExpanded(true);
-    	root.getChildren().add(new TreeItem<String>("re-link"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("overlap"));
-    	root.getChildren().get(0).getChildren().get(0).getChildren().add(new TreeItem<String>("Adapt"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("product-related-link"));
-    	root.getChildren().get(0).getChildren().get(1).getChildren().add(new TreeItem<String>("Satisfy"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("dependency"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Require-Features-In"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Casual-Dependency-Conformance"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Import"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Developmental"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Export"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Part-Of"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Correspondence"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Usage"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Derrive"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Is-A"));
-    	root.getChildren().get(0).getChildren().get(2).getChildren().add(new TreeItem<String>("Has-A"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("generalize"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("contribution"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("rationale"));
-    	root.getChildren().get(0).getChildren().add(new TreeItem<String>("process-related-link"));
-    	root.getChildren().add(new TreeItem<String>("se-link"));
-    	root.getChildren().get(1).getChildren().add(new TreeItem<String>("Implemented-By"));
-    	root.getChildren().get(1).getChildren().add(new TreeItem<String>("Tested-By"));
-    	root.getChildren().add(new TreeItem<String>("mde-link"));
-    	root.getChildren().get(2).getChildren().add(new TreeItem<String>("implicit"));
-    	root.getChildren().get(2).getChildren().add(new TreeItem<String>("explicit"));
-    	treeView.setRoot(root);
+    	SemanticWeb semWeb = new SemanticWeb("http://www.ontorion.com/ontologies/Ontology92f6fe28b5854078a984b0607d68f51e#","TracLink.rdf");
+    	
+    	TreeNode<String> treeRoot = semWeb.getRoot();
+    	
+    	createTreeView(treeRoot);
     }
+
+	private void createTreeView(TreeNode<String> treeRoot) {
+		TreeItem<String> root = new TreeItem<>("Link");
+    	Stack<TreeItem<String>> treeStack = new Stack<>();
+    	treeStack.push(root);
+    	int currentLevel = 0;
+    	boolean skipFrist = true;
+    	for (TreeNode<String> node : treeRoot) {
+    		if (!skipFrist) {
+    			if(node.getLevel() <= currentLevel) {
+    				for (int i = 0; i <= currentLevel - node.getLevel(); i++) {
+    					treeStack.pop();    				
+    				}
+    			}
+    			TreeItem<String> tmp = new TreeItem<>(node.data);
+    			treeStack.peek().getChildren().add(tmp);
+    			treeStack.push(tmp);
+    			currentLevel = node.getLevel();    			
+    		}
+    		else {
+    			skipFrist = false;
+    		}
+		}
+    	root.setExpanded(true);
+    	treeView.setRoot(root);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

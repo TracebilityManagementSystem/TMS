@@ -23,6 +23,3 @@
 hs_err_pid*
 
 bin/
-.project
-.classpath
-.settings/
